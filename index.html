@@ -1,0 +1,2255 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 «Ж» — 80-я гимназия</title>
+<style>
+* {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6fb;
+  color: #172033;
+}
+header {
+  background: linear-gradient(135deg, #172554, #2563eb);
+  color: white;
+  text-align: center;
+  padding: 25px 15px;
+}
+.logo {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  background: white;
+  border-radius: 25px;
+  padding: 5px;
+}
+header h1 {
+  margin: 8px 0 3px;
+  font-size: 34px;
+}
+header p {
+  margin: 0;
+  font-size: 18px;
+}
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: white;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.12);
+}
+button,
+.btn {
+  border: none;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #e8eefc;
+  color: #172554;
+  font-weight: bold;
+  cursor: pointer;
+}
+button:hover,
+.btn:hover {
+  background: #d7e3ff;
+}
+.page {
+  display: none;
+  max-width: 1050px;
+  margin: 25px auto;
+  padding: 0 15px;
+}
+.page.active {
+  display: block;
+}
+.card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 15px rgba(0,0,0,.08);
+}
+.card h2,
+.card h3 {
+  margin-top: 0;
+}
+.hidden {
+  display: none !important;
+}
+.alert {
+  padding: 16px;
+  border-radius: 15px;
+  margin-bottom: 18px;
+  font-weight: bold;
+}
+.warning {
+  background: #fff4cc;
+  color: #805b00;
+}
+.danger {
+  background: #ffe1e1;
+  color: #a00000;
+}
+.info {
+  background: #e0edff;
+  color: #174ea6;
+}
+.success {
+  background: #dcfce7;
+  color: #166534;
+}
+input,
+textarea,
+select {
+  width: 100%;
+  padding: 11px;
+  margin: 6px 0 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 15px;
+}
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.action-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 10px;
+}
+.action-grid button {
+  min-height: 55px;
+}
+.role {
+  display: inline-block;
+  padding: 5px 8px;
+  margin: 3px;
+  border-radius: 8px;
+  background: #e0e7ff;
+  font-size: 12px;
+}
+.student-item,
+.teacher-item,
+.reminder-item,
+.event-item,
+.announcement-item,
+.account-item {
+  background: #f8fafc;
+  padding: 14px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.status {
+  font-weight: bold;
+}
+.small {
+  color: #64748b;
+  font-size: 13px;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+th {
+  background: #eef3ff;
+}
+.preview-banner {
+  position: sticky;
+  top: 0;
+  z-index: 300;
+  background: #ea580c;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+.preview-banner button {
+  margin-left: 10px;
+}
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #64748b;
+}
+.chat-box {
+  height: 400px;
+  overflow-y: auto;
+  background: #eef2f7;
+  border-radius: 15px;
+  padding: 12px;
+  margin-bottom: 12px;
+}
+.message {
+  background: white;
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 8px;
+  max-width: 85%;
+}
+.message.mine {
+  margin-left: auto;
+  background: #dbeafe;
+}
+.message-name {
+  font-weight: bold;
+  font-size: 13px;
+}
+.message-time {
+  color: #64748b;
+  font-size: 11px;
+}
+.login-screen {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 15px;
+}
+.checkbox-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.checkbox-line input {
+  width: auto;
+  margin: 0;
+}
+.account-block {
+  border: 2px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+@media(max-width:650px) {
+  header h1 {
+    font-size: 28px;
+  }
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  nav button {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+  table {
+    font-size: 12px;
+  }
+}
+</style>
+</head>
+<body>
+<div id="previewBanner" class="preview-banner hidden">
+  👁️ Вы смотрите сайт как:
+  <span id="previewName"></span>
+  <button onclick="exitPreview()">⬅️ Вернуться</button>
+</div>
+<header>
+  <img src="logo.png" class="logo" alt="Логотип класса">
+  <h1>7 «Ж»</h1>
+  <p>80-я гимназия</p>
+</header>
+<nav>
+  <button onclick="showPage('home')">🏠 Главная</button>
+  <button onclick="showPage('schedule')">📅 Расписание</button>
+  <button onclick="showPage('homework')">📚 Домашка</button>
+  <button onclick="showPage('announcements')">📢 Объявления</button>
+  <button onclick="showPage('students')">👥 Ученики</button>
+  <button onclick="showPage('teachers')">👩‍🏫 Учителя</button>
+  <button onclick="showPage('events')">🎉 Мероприятия</button>
+  <button onclick="showPage('reminders')">🔔 Напоминания</button>
+  <button onclick="showPage('chat')">💬 Общий чат</button>
+  <button onclick="showPage('account')">👤 Аккаунт</button>
+  <button
+    id="adminButton"
+    class="hidden"
+    onclick="showPage('admin')">
+    👑 Администратор
+  </button>
+</nav>
+<!-- ГЛАВНАЯ -->
+<section id="home" class="page active">
+  <div id="homeStatus"></div>
+  <div class="card">
+    <h2>Добро пожаловать в 7 «Ж»! 🎓</h2>
+    <p>
+      Это сайт нашего класса 80-й гимназии.
+    </p>
+    <p>
+      Здесь находятся расписание, домашние задания,
+      объявления, мероприятия, учителя,
+      напоминания и общий чат класса.
+    </p>
+  </div>
+  <div class="card">
+    <h3>📌 Быстрый доступ</h3>
+    <div class="action-grid">
+      <button onclick="showPage('schedule')">
+        📅 Расписание
+      </button>
+      <button onclick="showPage('homework')">
+        📚 Домашка
+      </button>
+      <button onclick="showPage('announcements')">
+        📢 Объявления
+      </button>
+      <button onclick="showPage('teachers')">
+        👩‍🏫 Учителя
+      </button>
+      <button onclick="showPage('events')">
+        🎉 Мероприятия
+      </button>
+      <button onclick="showPage('chat')">
+        💬 Общий чат
+      </button>
+    </div>
+  </div>
+</section>
+<!-- РАСПИСАНИЕ -->
+<section id="schedule" class="page">
+  <div id="scheduleStatus"></div>
+  <div class="card">
+    <h2>📅 Расписание</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>День</th>
+          <th>1</th>
+          <th>2</th>
+          <th>3</th>
+          <th>4</th>
+          <th>5</th>
+          <th>6</th>
+        </tr>
+      </thead>
+      <tbody id="scheduleTable"></tbody>
+    </table>
+  </div>
+  <div class="card">
+    <h3>ℹ️ Информация</h3>
+    <p id="scheduleNote"></p>
+  </div>
+</section>
+<!-- ДОМАШКА -->
+<section id="homework" class="page">
+  <div class="card">
+    <h2>📚 Домашка</h2>
+    <div id="homeworkList"></div>
+  </div>
+</section>
+<!-- ОБЪЯВЛЕНИЯ -->
+<section id="announcements" class="page">
+  <div class="card">
+    <h2>📢 Объявления</h2>
+    <div id="announcementsList"></div>
+  </div>
+</section>
+<!-- УЧЕНИКИ -->
+<section id="students" class="page">
+  <div class="card">
+    <h2>👥 Ученики 7 «Ж»</h2>
+    <div id="studentsList"></div>
+  </div>
+</section>
+<!-- УЧИТЕЛЯ -->
+<section id="teachers" class="page">
+  <div class="card">
+    <h2>👩‍🏫 Учителя</h2>
+    <div id="teachersList"></div>
+  </div>
+</section>
+<!-- МЕРОПРИЯТИЯ -->
+<section id="events" class="page">
+  <div class="card">
+    <h2>🎉 Мероприятия</h2>
+    <div id="eventsList"></div>
+  </div>
+</section>
+<!-- НАПОМИНАНИЯ -->
+<section id="reminders" class="page">
+  <div class="card">
+    <h2>🔔 Напоминания</h2>
+    <div id="remindersList"></div>
+  </div>
+</section>
+<!-- ЧАТ -->
+<section id="chat" class="page">
+  <div class="card">
+    <h2>💬 Общий чат 7 «Ж»</h2>
+    <p class="small">
+      Общайтесь с одноклассниками.
+    </p>
+    <div id="chatBox" class="chat-box"></div>
+    <textarea
+      id="chatMessage"
+      placeholder="Напишите сообщение..."></textarea>
+    <button onclick="sendChatMessage()">
+      💬 Отправить
+    </button>
+    <button onclick="clearMyChatMessages()">
+      🗑️ Удалить мои сообщения
+    </button>
+  </div>
+</section>
+<!-- АККАУНТ -->
+<section id="account" class="page">
+  <div class="card">
+    <h2>👤 Мой аккаунт</h2>
+    <p>
+      <b>Пользователь:</b>
+      <span id="accountName"></span>
+    </p>
+    <div id="accountRoles"></div>
+    <button onclick="logout()">
+      🚪 Выйти
+    </button>
+  </div>
+</section>
+<!-- АДМИН -->
+<section id="admin" class="page">
+  <div class="card admin-box">
+    <h2>👑 Панель администратора</h2>
+    <p>
+      Администратор:
+      <b>Тихон А.</b>
+    </p>
+    <div class="action-grid">
+      <button onclick="openScheduleEditor()">
+        📅 Изменить расписание
+      </button>
+      <button onclick="setUnknownSchedule()">
+        ❓ Расписание пока неизвестно
+      </button>
+      <button onclick="setShortLessons()">
+        ✂️ Включить сокращённые уроки
+      </button>
+      <button onclick="setTechnicalCancel()">
+        🔧 Уроки отменены по техническим причинам
+      </button>
+      <button onclick="setWeatherCancel()">
+        🌨️ Уроки отменены из-за погодных условий
+      </button>
+      <button onclick="setPossibleCancel()">
+        ⚠️ Возможна отмена занятий
+      </button>
+      <button onclick="clearScheduleMode()">
+        ✅ Убрать особый режим
+      </button>
+      <button onclick="openAccountManager()">
+        🔐 Управление аккаунтами
+      </button>
+      <button onclick="openTeacherEditor()">
+        👩‍🏫 Управление учителями
+      </button>
+      <button onclick="openAnnouncementEditor()">
+        📢 Добавить объявление
+      </button>
+      <button onclick="openHomeworkEditor()">
+        📚 Изменить домашку
+      </button>
+      <button onclick="openEventEditor()">
+        🎉 Добавить мероприятие
+      </button>
+      <button onclick="openReminderEditor()">
+        🔔 Отправить напоминание
+      </button>
+      <button onclick="openRolesEditor()">
+        🛡️ Управление ролями
+      </button>
+      <button onclick="previewStudent()">
+        👁️ Посмотреть как ученик
+      </button>
+      <button onclick="clearChat()">
+        🗑️ Очистить общий чат
+      </button>
+    </div>
+  </div>
+  <!-- РАСПИСАНИЕ -->
+  <div id="scheduleEditor" class="card hidden">
+    <h3>📅 Изменить расписание</h3>
+    <p class="small">
+      Вводи предметы через запятую.
+      Максимум 6 уроков в день.
+    </p>
+    <label>Понедельник</label>
+    <input id="mon">
+    <label>Вторник</label>
+    <input id="tue">
+    <label>Среда</label>
+    <input id="wed">
+    <label>Четверг</label>
+    <input id="thu">
+    <label>Пятница</label>
+    <input id="fri">
+    <button onclick="saveSchedule()">
+      💾 Сохранить
+    </button>
+    <button onclick="closeEditors()">
+      Закрыть
+    </button>
+  </div>
+  <!-- АККАУНТЫ -->
+  <div id="accountManager" class="card hidden">
+    <h3>🔐 Управление аккаунтами</h3>
+    <p class="small">
+      Здесь администратор может менять логины,
+      пароли и состояние аккаунтов.
+    </p>
+    <div id="accountsList"></div>
+  </div>
+  <!-- РЕДАКТОР АККАУНТА -->
+  <div id="accountEditor" class="card hidden">
+    <h3>✏️ Изменить аккаунт</h3>
+    <p>
+      Ученик:
+      <b id="editAccountStudent"></b>
+    </p>
+    <label>Логин</label>
+    <input id="editLogin">
+    <label>Пароль</label>
+    <input id="editPassword">
+    <div class="checkbox-line">
+      <input
+        type="checkbox"
+        id="loginEnabled">
+      <label for="loginEnabled">
+        🔐 Требовать логин
+      </label>
+    </div>
+    <div class="checkbox-line">
+      <input
+        type="checkbox"
+        id="passwordEnabled">
+      <label for="passwordEnabled">
+        🔑 Требовать пароль
+      </label>
+    </div>
+    <div class="checkbox-line">
+      <input
+        type="checkbox"
+        id="accountChecking">
+      <label for="accountChecking">
+        ⏳ Временно находится на проверке
+      </label>
+    </div>
+    <button onclick="saveAccountSettings()">
+      💾 Сохранить
+    </button>
+    <button onclick="closeEditors()">
+      Закрыть
+    </button>
+  </div>
+  <!-- УЧИТЕЛЯ -->
+  <div id="teacherEditor" class="card hidden">
+    <h3>👩‍🏫 Добавить учителя</h3>
+    <input id="teacherFirst" placeholder="Имя">
+    <input
+      id="teacherPatronymic"
+      placeholder="Отчество">
+    <input
+      id="teacherLast"
+      placeholder="Фамилия">
+    <input
+      id="teacherSubject"
+      placeholder="Предмет">
+    <input
+      id="teacherPhone"
+      placeholder="Номер телефона">
+    <div class="checkbox-line">
+      <input
+        type="checkbox"
+        id="teacherLeader">
+      <label>
+        ⭐ Классный руководитель
+      </label>
+    </div>
+    <button onclick="saveTeacher()">
+      ➕ Добавить
+    </button>
+    <div id="adminTeachersList"></div>
+  </div>
+  <!-- ОБЪЯВЛЕНИЯ -->
+  <div id="announcementEditor" class="card hidden">
+    <h3>📢 Новое объявление</h3>
+    <input
+      id="announcementTitle"
+      placeholder="Заголовок">
+    <textarea
+      id="announcementText"
+      placeholder="Текст"></textarea>
+    <button onclick="saveAnnouncement()">
+      📢 Опубликовать
+    </button>
+  </div>
+  <!-- ДОМАШКА -->
+  <div id="homeworkEditor" class="card hidden">
+    <h3>📚 Домашка</h3>
+    <textarea
+      id="homeworkInput"
+      placeholder="Введите домашнее задание"></textarea>
+    <button onclick="saveHomework()">
+      💾 Сохранить
+    </button>
+  </div>
+  <!-- МЕРОПРИЯТИЯ -->
+  <div id="eventEditor" class="card hidden">
+    <h3>🎉 Новое мероприятие</h3>
+    <input
+      id="eventTitle"
+      placeholder="Название">
+    <input
+      id="eventDate"
+      placeholder="Дата и время">
+    <textarea
+      id="eventText"
+      placeholder="Описание"></textarea>
+    <button onclick="saveEvent()">
+      🎉 Добавить
+    </button>
+  </div>
+  <!-- НАПОМИНАНИЯ -->
+  <div id="reminderEditor" class="card hidden">
+    <h3>🔔 Личное напоминание</h3>
+    <select id="reminderStudent"></select>
+    <textarea
+      id="reminderText"
+      placeholder="Текст напоминания"></textarea>
+    <button onclick="saveReminder()">
+      🔔 Отправить
+    </button>
+  </div>
+  <!-- РОЛИ -->
+  <div id="rolesEditor" class="card hidden">
+    <h3>🛡️ Управление ролями</h3>
+    <select id="roleStudent"></select>
+    <select id="roleType">
+      <option value="student">
+        👨‍🎓 Ученик
+      </option>
+      <option value="leader">
+        ⭐ Староста
+      </option>
+      <option value="duty">
+        🧹 Ответственный за дежурных
+      </option>
+      <option value="moderator">
+        🛡️ Модератор
+      </option>
+      <option value="temporaryAdmin">
+        ⏳ Временный администратор
+      </option>
+    </select>
+    <button onclick="addRole()">
+      ➕ Назначить
+    </button>
+    <button onclick="removeRole()">
+      ➖ Убрать
+    </button>
+    <div id="rolesList"></div>
+  </div>
+</section>
+<footer>
+  <b>7 «Ж»</b><br>
+  80-я гимназия<br>
+  Сайт класса
+</footer>
+<script>
+/* =========================================
+   УЧЕНИКИ
+========================================= */
+const students = [
+  "Адия А.",
+  "Наргиза А.",
+  "Тихон А.",
+  "Амина А.",
+  "Иса А.",
+  "Алтынай А.",
+  "Таймас Б.",
+  "Ардак Б.",
+  "Мунира В.",
+  "Корнелия Д.",
+  "Ансар Д.",
+  "Дамир Ж.",
+  "Адия И.",
+  "Дарига К.",
+  "Шамиль К.",
+  "Жансая К.",
+  "Диляра К.",
+  "Ясмин Л.",
+  "Анель М.",
+  "Яна М.",
+  "Адель М.",
+  "Алдияр Н.",
+  "Аким С.",
+  "Дален М.",
+  "Тимур Р."
+];
+/* =========================================
+   АККАУНТЫ
+========================================= */
+let accounts =
+  JSON.parse(
+    localStorage.getItem("classAccounts") || "null"
+  );
+if (!accounts) {
+  accounts = {};
+  students.forEach((name, index) => {
+    const base =
+      name
+        .toLowerCase()
+        .replace(/[.]/g, "")
+        .replace(/[^а-яa-z0-9]+/gi, "_");
+    accounts[name] = {
+      login: base,
+      password:
+        index === 2
+          ? "131111500025"
+          : "1234",
+      loginEnabled: true,
+      passwordEnabled: true,
+      checking: false
+    };
+  });
+  localStorage.setItem(
+    "classAccounts",
+    JSON.stringify(accounts)
+  );
+}
+/* =========================================
+   РОЛИ
+========================================= */
+let roles =
+  JSON.parse(
+    localStorage.getItem("classRoles") || "{}"
+  );
+students.forEach(name => {
+  if (!roles[name])
+    roles[name] = ["student"];
+});
+/* Тихон — администратор + староста + ученик */
+roles["Тихон А."] =
+  ["student", "leader", "admin"];
+localStorage.setItem(
+  "classRoles",
+  JSON.stringify(roles)
+);
+/* =========================================
+   ТЕКУЩИЙ ПОЛЬЗОВАТЕЛЬ
+========================================= */
+let currentUser =
+  localStorage.getItem("currentUser") || "";
+let previewUser = "";
+/* =========================================
+   РАСПИСАНИЕ
+========================================= */
+let schedule =
+  JSON.parse(
+    localStorage.getItem("classSchedule") ||
+    JSON.stringify({
+      "Понедельник": [
+        "Математика",
+        "Русский язык",
+        "Казахский язык",
+        "История",
+        "—",
+        "—"
+      ],
+      "Вторник":
+        ["—","—","—","—","—","—"],
+      "Среда":
+        ["—","—","—","—","—","—"],
+      "Четверг":
+        ["—","—","—","—","—","—"],
+      "Пятница":
+        ["—","—","—","—","—","—"]
+    })
+  );
+let scheduleStatus =
+  localStorage.getItem(
+    "scheduleStatus"
+  ) || "normal";
+let scheduleNote =
+  localStorage.getItem(
+    "scheduleNote"
+  ) ||
+  "Следите за изменениями расписания.";
+let zoomLink =
+  localStorage.getItem(
+    "zoomLink"
+  ) || "";
+/* =========================================
+   КОНТЕНТ
+========================================= */
+let homework =
+  localStorage.getItem(
+    "homework"
+  ) ||
+  "Домашнее задание пока не добавлено.";
+let announcements =
+  JSON.parse(
+    localStorage.getItem(
+      "announcements"
+    ) || "[]"
+  );
+let events =
+  JSON.parse(
+    localStorage.getItem(
+      "events"
+    ) || "[]"
+  );
+let teachers =
+  JSON.parse(
+    localStorage.getItem(
+      "teachers"
+    ) || "[]"
+  );
+let reminders =
+  JSON.parse(
+    localStorage.getItem(
+      "reminders"
+    ) || "[]"
+  );
+/* =========================================
+   ЧАТ
+========================================= */
+let chatMessages =
+  JSON.parse(
+    localStorage.getItem(
+      "classChat"
+    ) || "[]"
+  );
+/* =========================================
+   НАВИГАЦИЯ
+========================================= */
+function showPage(id) {
+  document
+    .querySelectorAll(".page")
+    .forEach(page =>
+      page.classList.remove("active")
+    );
+  const page =
+    document.getElementById(id);
+  if (page)
+    page.classList.add("active");
+  renderAll();
+}
+/* =========================================
+   АВТОРИЗАЦИЯ
+========================================= */
+function login() {
+  let available =
+    students
+      .map(name =>
+        `${name} — ${accounts[name].login}`
+      )
+      .join("\n");
+  const loginValue =
+    prompt(
+      "Введите логин:\n\n" +
+      available
+    );
+  if (!loginValue)
+    return;
+  const name =
+    students.find(
+      student =>
+        accounts[student].login === loginValue
+    );
+  if (!name) {
+    alert("Неверный логин.");
+    return;
+  }
+  const account =
+    accounts[name];
+  if (!account.loginEnabled) {
+    /* Если логин отключён,
+       используем этот аккаунт
+       только через администратора.
+    */
+    alert(
+      "Для этого аккаунта вход по логину отключён."
+    );
+    return;
+  }
+  if (account.checking) {
+    alert(
+      "⏳ Этот аккаунт временно находится на проверке."
+    );
+    return;
+  }
+  if (account.passwordEnabled) {
+    const password =
+      prompt("Введите пароль:");
+    if (password !== account.password) {
+      alert("Неверный пароль.");
+      return;
+    }
+  }
+  currentUser = name;
+  localStorage.setItem(
+    "currentUser",
+    currentUser
+  );
+  alert(
+    "Добро пожаловать, " +
+    name + "!"
+  );
+  renderAll();
+}
+/* =========================================
+   ВХОД КНОПКОЙ
+========================================= */
+function loginFromAccount() {
+  login();
+}
+/* =========================================
+   ВЫХОД
+========================================= */
+function logout() {
+  currentUser = "";
+  localStorage.removeItem(
+    "currentUser"
+  );
+  previewUser = "";
+  renderAll();
+  alert("Вы вышли из аккаунта.");
+}
+/* =========================================
+   АДМИНИСТРАТОР
+========================================= */
+function isAdmin() {
+  return (
+    !previewUser &&
+    currentUser === "Тихон А." &&
+    roles["Тихон А."].includes("admin")
+  );
+}
+function checkAdmin() {
+  if (isAdmin())
+    return true;
+  alert(
+    "Эта функция доступна только администратору сайта."
+  );
+  return false;
+}
+/* =========================================
+   РАСПИСАНИЕ
+========================================= */
+function renderSchedule() {
+  const tbody =
+    document.getElementById(
+      "scheduleTable"
+    );
+  tbody.innerHTML = "";
+  Object.keys(schedule)
+    .forEach(day => {
+      let row =
+        `<tr>
+          <td><b>${day}</b></td>`;
+      schedule[day]
+        .forEach(subject => {
+          row +=
+            `<td>${subject || "—"}</td>`;
+        });
+      row += "</tr>";
+      tbody.innerHTML += row;
+    });
+  document.getElementById(
+    "scheduleNote"
+  ).textContent =
+    scheduleNote;
+}
+function renderScheduleStatus() {
+  let html = "";
+  if (scheduleStatus === "unknown") {
+    html = `
+      <div class="alert warning">
+        ❓ <b>Расписание пока неизвестно</b><br>
+        Пожалуйста, уточните расписание
+        у классного руководителя.
+      </div>
+    `;
+  } else if (scheduleStatus === "short") {
+    html = `
+      <div class="alert warning">
+        ✂️ <b>Сегодня сокращённые уроки</b><br>
+        Продолжительность уроков изменена.
+        Уточните расписание у классного руководителя.
+      </div>
+    `;
+  } else if (scheduleStatus === "technical") {
+    html = `
+      <div class="alert danger">
+        🔧 <b>Сегодня уроки отменены
+        по техническим причинам.</b>
+      </div>
+    `;
+  } else if (scheduleStatus === "weather") {
+    html = `
+      <div class="alert danger">
+        🌨️ <b>Сегодня уроки отменены
+        из-за погодных условий.</b>
+      </div>
+    `;
+  } else if (scheduleStatus === "possible") {
+    html = `
+      <div class="alert warning">
+        ⚠️ <b>Возможна отмена занятий.</b><br>
+        Следите за дальнейшей информацией.
+        ${
+          zoomLink
+          ? `
+            <br><br>
+            🔗
+            <a href="${zoomLink}"
+               target="_blank">
+               Перейти в Zoom
+            </a>
+          `
+          : ""
+        }
+      </div>
+    `;
+  }
+  document.getElementById(
+    "scheduleStatus"
+  ).innerHTML = html;
+  document.getElementById(
+    "homeStatus"
+  ).innerHTML = html;
+}
+/* =========================================
+   РЕЖИМЫ РАСПИСАНИЯ
+========================================= */
+function setUnknownSchedule() {
+  if (!checkAdmin()) return;
+  scheduleStatus = "unknown";
+  scheduleNote =
+    "Расписание пока неизвестно. " +
+    "Уточните его у классного руководителя.";
+  saveScheduleMode();
+  alert(
+    "Включён режим «Расписание пока неизвестно»."
+  );
+}
+function setShortLessons() {
+  if (!checkAdmin()) return;
+  scheduleStatus = "short";
+  scheduleNote =
+    "Сегодня сокращённые уроки.";
+  saveScheduleMode();
+  alert(
+    "Включён режим сокращённых уроков."
+  );
+}
+function setTechnicalCancel() {
+  if (!checkAdmin()) return;
+  scheduleStatus = "technical";
+  scheduleNote =
+    "Уроки отменены по техническим причинам.";
+  saveScheduleMode();
+  alert(
+    "Уроки отменены по техническим причинам."
+  );
+}
+function setWeatherCancel() {
+  if (!checkAdmin()) return;
+  scheduleStatus = "weather";
+  scheduleNote =
+    "Уроки отменены из-за погодных условий.";
+  saveScheduleMode();
+  alert(
+    "Уроки отменены из-за погодных условий."
+  );
+}
+function setPossibleCancel() {
+  if (!checkAdmin()) return;
+  const link =
+    prompt(
+      "Введите Zoom-ссылку.\n\n" +
+      "Можно оставить пустым."
+    );
+  zoomLink =
+    link || "";
+  scheduleStatus =
+    "possible";
+  scheduleNote =
+    "Возможна отмена занятий.";
+  saveScheduleMode();
+  alert(
+    "Режим «Возможна отмена занятий» включён."
+  );
+}
+function clearScheduleMode() {
+  if (!checkAdmin()) return;
+  scheduleStatus =
+    "normal";
+  zoomLink = "";
+  scheduleNote =
+    "Следите за изменениями расписания.";
+  saveScheduleMode();
+  alert(
+    "Особый режим отключён."
+  );
+}
+function saveScheduleMode() {
+  localStorage.setItem(
+    "scheduleStatus",
+    scheduleStatus
+  );
+  localStorage.setItem(
+    "scheduleNote",
+    scheduleNote
+  );
+  localStorage.setItem(
+    "zoomLink",
+    zoomLink
+  );
+  renderAll();
+}
+/* =========================================
+   РЕДАКТОР РАСПИСАНИЯ
+========================================= */
+function openScheduleEditor() {
+  if (!checkAdmin()) return;
+  closeEditors();
+  document.getElementById(
+    "scheduleEditor"
+  ).classList.remove("hidden");
+  document.getElementById("mon").value =
+    schedule["Понедельник"].join(", ");
+  document.getElementById("tue").value =
+    schedule["Вторник"].join(", ");
+  document.getElementById("wed").value =
+    schedule["Среда"].join(", ");
+  document.getElementById("thu").value =
+    schedule["Четверг"].join(", ");
+  document.getElementById("fri").value =
+    schedule["Пятница"].join(", ");
+}
+function makeDay(id) {
+  let arr =
+    document.getElementById(id)
+      .value
+      .split(",")
+      .map(x => x.trim())
+      .filter(Boolean);
+  while (arr.length < 6)
+    arr.push("—");
+  return arr.slice(0, 6);
+}
+function saveSchedule() {
+  if (!checkAdmin()) return;
+  schedule["Понедельник"] =
+    makeDay("mon");
+  schedule["Вторник"] =
+    makeDay("tue");
+  schedule["Среда"] =
+    makeDay("wed");
+  schedule["Четверг"] =
+    makeDay("thu");
+  schedule["Пятница"] =
+    makeDay("fri");
+  localStorage.setItem(
+    "classSchedule",
+    JSON.stringify(schedule)
+  );
+  alert(
+    "Расписание сохранено."
+  );
+  renderAll();
+}
+/* =========================================
+   АККАУНТЫ — АДМИН
+========================================= */
+function openAccountManager() {
+  if (!checkAdmin()) return;
+  closeEditors();
+  document.getElementById(
+    "accountManager"
+  ).classList.remove("hidden");
+  renderAccounts();
+}
+function renderAccounts() {
+  const box =
+    document.getElementById(
+      "accountsList"
+    );
+  box.innerHTML = "";
+  students.forEach(name => {
+    const account =
+      accounts[name];
+    const div =
+      document.createElement("div");
+    div.className =
+      "account-block";
+    div.innerHTML = `
+      <b>${name}</b>
+      <p>
+        🔐 Логин:
+        ${account.loginEnabled
+          ? account.login
+          : "отключён"}
+      </p>
+      <p>
+        🔑 Пароль:
+        ${account.passwordEnabled
+          ? "установлен"
+          : "отключён"}
+      </p>
+      <p>
+        ${
+          account.checking
+          ? '<span class="role">⏳ На проверке</span>'
+          : '<span class="role">✅ Аккаунт активен</span>'
+        }
+      </p>
+      <button
+        onclick="editAccount('${name}')">
+        ✏️ Изменить
+      </button>
+    `;
+    box.appendChild(div);
+  });
+}
+function editAccount(name) {
+  if (!checkAdmin()) return;
+  closeEditors();
+  document.getElementById(
+    "accountEditor"
+  ).classList.remove("hidden");
+  document.getElementById(
+    "editAccountStudent"
+  ).textContent = name;
+  document.getElementById(
+    "editLogin"
+  ).value =
+    accounts[name].login;
+  document.getElementById(
+    "editPassword"
+  ).value =
+    accounts[name].password;
+  document.getElementById(
+    "loginEnabled"
+  ).checked =
+    accounts[name].loginEnabled;
+  document.getElementById(
+    "passwordEnabled"
+  ).checked =
+    accounts[name].passwordEnabled;
+  document.getElementById(
+    "accountChecking"
+  ).checked =
+    accounts[name].checking;
+}
+function saveAccountSettings() {
+  if (!checkAdmin()) return;
+  const name =
+    document.getElementById(
+      "editAccountStudent"
+    ).textContent;
+  const loginValue =
+    document.getElementById(
+      "editLogin"
+    ).value.trim();
+  const passwordValue =
+    document.getElementById(
+      "editPassword"
+    ).value;
+  const loginEnabled =
+    document.getElementById(
+      "loginEnabled"
+    ).checked;
+  const passwordEnabled =
+    document.getElementById(
+      "passwordEnabled"
+    ).checked;
+  const checking =
+    document.getElementById(
+      "accountChecking"
+    ).checked;
+  if (loginEnabled && !loginValue) {
+    alert(
+      "Если логин включён, необходимо его указать."
+    );
+    return;
+  }
+  accounts[name] = {
+    login:
+      loginValue,
+    password:
+      passwordValue,
+    loginEnabled:
+      loginEnabled,
+    passwordEnabled:
+      passwordEnabled,
+    checking:
+      checking
+  };
+  localStorage.setItem(
+    "classAccounts",
+    JSON.stringify(accounts)
+  );
+  alert(
+    "Аккаунт обновлён."
+  );
+  openAccountManager();
+}
+/* =========================================
+   УЧИТЕЛЯ
+========================================= */
+function openTeacherEditor() {
+  if (!checkAdmin()) return;
+  closeEditors();
+  document.getElementById(
+    "teacherEditor"
+  ).classList.remove("hidden");
+  renderAdminTeachers();
+}
+function saveTeacher() {
+  if (!checkAdmin()) return;
+  const teacher = {
+    first:
+      document.getElementById(
+        "teacherFirst"
+      ).value.trim(),
+    patronymic:
+      document.getElementById(
+        "teacherPatronymic"
+      ).value.trim(),
+    last:
+      document.getElementById(
+        "teacherLast"
+      ).value.trim(),
+    subject:
+      document.getElementById(
+        "teacherSubject"
+      ).value.trim(),
+    phone:
+      document.getElementById(
+        "teacherPhone"
+      ).value.trim(),
+    leader:
+      document.getElementById(
+        "teacherLeader"
+      ).checked
+  };
+  if (!teacher.first || !teacher.last) {
+    alert(
+      "Введите имя и фамилию."
+    );
+    return;
+  }
+  teachers.push(teacher);
+  localStorage.setItem(
+    "teachers",
+    JSON.stringify(teachers)
+  );
+  [
+    "teacherFirst",
+    "teacherPatronymic",
+    "teacherLast",
+    "teacherSubject",
+    "teacherPhone"
+  ].forEach(id =>
+    document.getElementById(id).value = ""
+  );
+  document.getElementById(
+    "teacherLeader"
+  ).checked = false;
+  renderTeachers();
+  renderAdminTeachers();
+  alert(
+    "Учитель добавлен."
+  );
+}
+function renderTeachers() {
+  const box =
+    document.getElementById(
+      "teachersList"
+    );
+  box.innerHTML = "";
+  if (!teachers.length) {
+    box.innerHTML =
+      "<p>Учителя пока не добавлены.</p>";
+    return;
+  }
+  teachers.forEach(t => {
+    box.innerHTML += `
+      <div class="teacher-item">
+        <b>
+          ${t.last}
+          ${t.first}
+          ${t.patronymic}
+        </b>
+        <br>
+        📚 Предмет:
+        ${t.subject || "Не указан"}
+        <br>
+        ${
+          t.leader
+          ? "⭐ Классный руководитель 7 «Ж»<br>"
+          : ""
+        }
+        📞
+        ${t.phone || "Номер не указан"}
+      </div>
+    `;
+  });
+}
+function renderAdminTeachers() {
+  const box =
+    document.getElementById(
+      "adminTeachersList"
+    );
+  box.innerHTML = "";
+  teachers.forEach((t,index) => {
+    box.innerHTML += `
+      <div class="teacher-item">
+        <b>
+          ${t.last}
+          ${t.first}
+          ${t.patronymic}
+        </b>
+        <br>
+        📚 ${t.subject || "Предмет не указан"}
+        <br>
+        ${
+          t.leader
+          ? "⭐ Классный руководитель<br>"
+          : ""
+        }
+        📞 ${t.phone || "Нет номера"}
+        <br><br>
+        <button
+          onclick="deleteTeacher(${index})">
+          🗑️ Удалить
+        </button>
+      </div>
+    `;
+  });
+}
+function deleteTeacher(index) {
+  if (!checkAdmin()) return;
+  if (
+    !confirm(
+      "Удалить учителя?"
+    )
+  )
+    return;
+  teachers.splice(index,1);
+  localStorage.setItem(
+    "teachers",
+    JSON.stringify(teachers)
+  );
+  renderTeachers();
+  renderAdminTeachers();
+}
+/* =========================================
+   ОБЪЯВЛЕНИЯ
+========================================= */
+function openAnnouncementEditor() {
+  if (!checkAdmin()) return;
+  closeEditors();
+  document.getElementById(
+    "announcementEditor"
+  ).classList.remove("hidden");
+}
+function saveAnnouncement() {
+  if (!checkAdmin()) return;
+  const title =
+    document.getElementById(
+      "announcementTitle"
+    ).value.trim();
+  const text =
+    document.getElementById(
+      "announcementText"
+    ).value.trim();
+  if (!title || !text) {
+    alert(
+      "Заполните все поля."
+    );
+    return;
+  }
+  announcements.unshift({
+    title,
+    text,
+    date:
+      new Date()
+        .toLocaleString("ru-RU")
+  });
+  localStorage.setItem(
+    "announcements",
+    JSON.stringify(announcements)
+  );
+  document.getElementById(
+    "announcementTitle"
+  ).value = "";
+  document.getElementById(
+    "announcementText"
+  ).value = "";
+  renderAnnouncements();
+  alert(
+    "Объявление опубликовано."
+  );
+}
+function renderAnnouncements() {
+  const box =
+    document.getElementById(
+      "announcementsList"
+    );
+  box.innerHTML = "";
+  if (!announcements.length) {
+    box.innerHTML =
+      "<p>Объявлений пока нет.</p>";
+    return;
+  }
+  announcements.forEach((a,index) => {
+    box.innerHTML += `
+      <div class="announcement-item">
+        <h3>${a.title}</h3>
+        <p>${a.text}</p>
+        <small>
+          ${a.date}
+        </small>
+        ${
+          isAdmin()
+          ? `
+            <br><br>
+            <button
+              onclick="deleteAnnouncement(${index})">
+              🗑️ Удалить
+            </button>
+          `
+          : ""
+        }
+      </div>
+    `;
+  });
+}
+function deleteAnnouncement(index) {
+  if (!checkAdmin()) return;
+  announcements.splice(index,1);
+  localStorage.setItem(
+    "announcements",
+    JSON.stringify(announcements)
+  );
+  renderAnnouncements();
+}
+/* =========================================
+   ДОМАШКА
+========================================= */
+function openHomeworkEditor() {
+  if (!checkAdmin()) return;
+  closeEditors();
+  document.getElementById(
+    "homeworkEditor"
+  ).classList.remove("hidden");
+  document.getElementById(
+    "homeworkInput"
+  ).value =
+    homework;
+}
+function saveHomework() {
+  if (!checkAdmin()) return;
+  homework =
+    document.getElementById(
+      "homeworkInput"
+    ).value.trim();
+  localStorage.setItem(
+    "homework",
+    homework
+  );
+  renderHomework();
+  alert(
+    "Домашка сохранена."
+  );
+}
+function renderHomework() {
+  document.getElementById(
+    "homeworkList"
+  ).innerHTML = `
+    <div class="announcement-item">
+      ${homework}
+    </div>
+  `;
+}
+/* =========================================
+   МЕРОПРИЯТИЯ
+========================================= */
+function openEventEditor() {
+  if (!checkAdmin()) return;
+  closeEditors();
+  document.getElementById(
+    "eventEditor"
+  ).classList.remove("hidden");
+}
+function saveEvent() {
+  if (!checkAdmin()) return;
+  const title =
+    document.getElementById(
+      "eventTitle"
+    ).value.trim();
+  const date =
+    document.getElementById(
+      "eventDate"
+    ).value.trim();
+  const text =
+    document.getElementById(
+      "eventText"
+    ).value.trim();
+  if (!title) {
+    alert(
+      "Введите название."
+    );
+    return;
+  }
+  events.unshift({
+    title,
+    date,
+    text
+  });
+  localStorage.setItem(
+    "events",
+    JSON.stringify(events)
+  );
+  document.getElementById(
+    "eventTitle"
+  ).value = "";
+  document.getElementById(
+    "eventDate"
+  ).value = "";
+  document.getElementById(
+    "eventText"
+  ).value = "";
+  renderEvents();
+  alert(
+    "Мероприятие добавлено."
+  );
+}
+function renderEvents() {
+  const box =
+    document.getElementById(
+      "eventsList"
+    );
+  box.innerHTML = "";
+  if (!events.length) {
+    box.innerHTML =
+      "<p>Мероприятий пока нет.</p>";
+    return;
+  }
+  events.forEach((e,index) => {
+    box.innerHTML += `
+      <div class="event-item">
+        <h3>
+          🎉 ${e.title}
+        </h3>
+        <b>
+          ${e.date || ""}
+        </b>
+        <p>
+          ${e.text || ""}
+        </p>
+        ${
+          isAdmin()
+          ? `
+            <button
+              onclick="deleteEvent(${index})">
+              🗑️ Удалить
+            </button>
+          `
+          : ""
+        }
+      </div>
+    `;
+  });
+}
+function deleteEvent(index) {
+  if (!checkAdmin()) return;
+  events.splice(index,1);
+  localStorage.setItem(
+    "events",
+    JSON.stringify(events)
+  );
+  renderEvents();
+}
+/* =========================================
+   НАПОМИНАНИЯ
+========================================= */
+function openReminderEditor() {
+  if (!checkAdmin()) return;
+  closeEditors();
+  document.getElementById(
+    "reminderEditor"
+  ).classList.remove("hidden");
+  const select =
+    document.getElementById(
+      "reminderStudent"
+    );
+  select.innerHTML = "";
+  students
+    .filter(
+      s => s !== "Тихон А."
+    )
+    .forEach(s => {
+      select.innerHTML +=
+        `<option>${s}</option>`;
+    });
+}
+function saveReminder() {
+  if (!checkAdmin()) return;
+  const student =
+    document.getElementById(
+      "reminderStudent"
+    ).value;
+  const text =
+    document.getElementById(
+      "reminderText"
+    ).value.trim();
+  if (!text) {
+    alert(
+      "Введите текст."
+    );
+    return;
+  }
+  reminders.push({
+    student,
+    text,
+    response:
+      "Ожидает ответа",
+    date:
+      new Date()
+        .toLocaleString("ru-RU")
+  });
+  localStorage.setItem(
+    "reminders",
+    JSON.stringify(reminders)
+  );
+  document.getElementById(
+    "reminderText"
+  ).value = "";
+  renderReminders();
+  alert(
+    "Напоминание отправлено."
+  );
+}
+function renderReminders() {
+  const box =
+    document.getElementById(
+      "remindersList"
+    );
+  box.innerHTML = "";
+  const user =
+    previewUser ||
+    currentUser;
+  if (!user) {
+    box.innerHTML =
+      "<p>Войдите в аккаунт.</p>";
+    return;
+  }
+  const mine =
+    reminders.filter(
+      r => r.student === user
+    );
+  if (!mine.length) {
+    box.innerHTML =
+      "<p>Новых напоминаний нет.</p>";
+  }
+  mine.forEach(r => {
+    const index =
+      reminders.indexOf(r);
+    box.innerHTML += `
+      <div class="reminder-item">
+        <b>🔔 Напоминание</b>
+        <p>
+          ${r.text}
+        </p>
+        <p>
+          <b>Статус:</b>
+          ${r.response}
+        </p>
+        ${
+          r.response === "Ожидает ответа"
+          ? `
+            <button
+              onclick="answerReminder(${index}, 'Понятно')">
+              ✅ Понятно
+            </button>
+            <button
+              onclick="answerReminder(${index}, 'Не могу / не согласен')">
+              ❌ Не могу / не согласен
+            </button>
+          `
+          : ""
+        }
+      </div>
+    `;
+  });
+  if (isAdmin()) {
+    box.innerHTML +=
+      "<hr><h3>👑 Ответы учеников</h3>";
+    reminders.forEach(r => {
+      box.innerHTML += `
+        <div class="reminder-item">
+          <b>${r.student}</b>
+          <p>${r.text}</p>
+          <b>
+            Ответ:
+            ${r.response}
+          </b>
+        </div>
+      `;
+    });
+  }
+}
+function answerReminder(index,answer) {
+  const user =
+    previewUser ||
+    currentUser;
+  if (
+    reminders[index].student !== user
+  )
+    return;
+  reminders[index].response =
+    answer;
+  localStorage.setItem(
+    "reminders",
+    JSON.stringify(reminders)
+  );
+  renderReminders();
+}
+/* =========================================
+   РОЛИ
+========================================= */
+function openRolesEditor() {
+  if (!checkAdmin()) return;
+  closeEditors();
+  document.getElementById(
+    "rolesEditor"
+  ).classList.remove("hidden");
+  const select =
+    document.getElementById(
+      "roleStudent"
+    );
+  select.innerHTML = "";
+  students.forEach(s => {
+    select.innerHTML +=
+      `<option>${s}</option>`;
+  });
+  renderRoles();
+}
+function addRole() {
+  if (!checkAdmin()) return;
+  const student =
+    document.getElementById(
+      "roleStudent"
+    ).value;
+  const role =
+    document.getElementById(
+      "roleType"
+    ).value;
+  if (!roles[student])
+    roles[student] = ["student"];
+  if (!roles[student].includes(role))
+    roles[student].push(role);
+  localStorage.setItem(
+    "classRoles",
+    JSON.stringify(roles)
+  );
+  renderRoles();
+}
+function removeRole() {
+  if (!checkAdmin()) return;
+  const student =
+    document.getElementById(
+      "roleStudent"
+    ).value;
+  const role =
+    document.getElementById(
+      "roleType"
+    ).value;
+  if (
+    student === "Тихон А." &&
+    role === "admin"
+  ) {
+    alert(
+      "Главного администратора удалить нельзя."
+    );
+    return;
+  }
+  roles[student] =
+    (roles[student] || [])
+      .filter(r => r !== role);
+  if (!roles[student].length)
+    roles[student] = ["student"];
+  localStorage.setItem(
+    "classRoles",
+    JSON.stringify(roles)
+  );
+  renderRoles();
+}
+function renderRoles() {
+  const box =
+    document.getElementById(
+      "rolesList"
+    );
+  box.innerHTML = "";
+  students.forEach(name => {
+    box.innerHTML += `
+      <div class="student-item">
+        <b>${name}</b>
+        <br>
+        ${
+          (roles[name] || ["student"])
+            .map(r =>
+              `<span class="role">
+                ${roleName(r)}
+              </span>`
+            )
+            .join("")
+        }
+      </div>
+    `;
+  });
+}
+function roleName(role) {
+  const names = {
+    student:
+      "👨‍🎓 Ученик",
+    leader:
+      "⭐ Староста",
+    duty:
+      "🧹 Ответственный за дежурных",
+    moderator:
+      "🛡️ Модератор",
+    temporaryAdmin:
+      "⏳ Временный администратор",
+    admin:
+      "👑 Администратор сайта"
+  };
+  return names[role] || role;
+}
+/* =========================================
+   ОБЩИЙ ЧАТ
+========================================= */
+function sendChatMessage() {
+  const user =
+    previewUser ||
+    currentUser;
+  if (!user) {
+    alert(
+      "Сначала войдите в аккаунт."
+    );
+    return;
+  }
+  const input =
+    document.getElementById(
+      "chatMessage"
+    );
+  const text =
+    input.value.trim();
+  if (!text)
+    return;
+  chatMessages.push({
+    user,
+    text,
+    time:
+      new Date()
+        .toLocaleString("ru-RU")
+  });
+  localStorage.setItem(
+    "classChat",
+    JSON.stringify(chatMessages)
+  );
+  input.value = "";
+  renderChat();
+}
+function renderChat() {
+  const box =
+    document.getElementById(
+      "chatBox"
+    );
+  box.innerHTML = "";
+  if (!chatMessages.length) {
+    box.innerHTML =
+      "<p>Сообщений пока нет.</p>";
+    return;
+  }
+  const user =
+    previewUser ||
+    currentUser;
+  chatMessages.forEach(message => {
+    const div =
+      document.createElement("div");
+    div.className =
+      "message " +
+      (
+        message.user === user
+        ? "mine"
+        : ""
+      );
+    div.innerHTML = `
+      <div class="message-name">
+        ${message.user}
+      </div>
+      <div>
+        ${escapeHTML(message.text)}
+      </div>
+      <div class="message-time">
+        ${message.time}
+      </div>
+    `;
+    box.appendChild(div);
+  });
+  box.scrollTop =
+    box.scrollHeight;
+}
+function clearMyChatMessages() {
+  const user =
+    previewUser ||
+    currentUser;
+  if (!user) {
+    alert(
+      "Сначала войдите."
+    );
+    return;
+  }
+  if (
+    !confirm(
+      "Удалить все ваши сообщения?"
+    )
+  )
+    return;
+  chatMessages =
+    chatMessages.filter(
+      m => m.user !== user
+    );
+  localStorage.setItem(
+    "classChat",
+    JSON.stringify(chatMessages)
+  );
+  renderChat();
+}
+function clearChat() {
+  if (!checkAdmin()) return;
+  if (
+    !confirm(
+      "Удалить весь общий чат?"
+    )
+  )
+    return;
+  chatMessages = [];
+  localStorage.setItem(
+    "classChat",
+    "[]"
+  );
+  renderChat();
+  alert(
+    "Чат очищен."
+  );
+}
+function escapeHTML(text) {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+/* =========================================
+   ПРОСМОТР КАК УЧЕНИК
+========================================= */
+function previewStudent() {
+  if (!checkAdmin()) return;
+  const name =
+    prompt(
+      "Введите имя ученика:\n\n" +
+      students.join("\n")
+    );
+  if (!name)
+    return;
+  if (!students.includes(name)) {
+    alert(
+      "Такого ученика нет."
+    );
+    return;
+  }
+  previewUser =
+    name;
+  document.getElementById(
+    "previewBanner"
+  ).classList.remove(
+    "hidden"
+  );
+  document.getElementById(
+    "previewName"
+  ).textContent =
+    name;
+  document.getElementById(
+    "adminButton"
+  ).classList.add(
+    "hidden"
+  );
+  showPage("home");
+}
+function exitPreview() {
+  previewUser = "";
+  document.getElementById(
+    "previewBanner"
+  ).classList.add(
+    "hidden"
+  );
+  if (isAdmin()) {
+    document.getElementById(
+      "adminButton"
+    ).classList.remove(
+      "hidden"
+    );
+  }
+  renderAll();
+}
+/* =========================================
+   АККАУНТ
+========================================= */
+function renderAccount() {
+  const user =
+    previewUser ||
+    currentUser;
+  document.getElementById(
+    "accountName"
+  ).textContent =
+    user ||
+    "Не выполнен вход";
+  const box =
+    document.getElementById(
+      "accountRoles"
+    );
+  box.innerHTML = "";
+  if (!user) {
+    box.innerHTML = `
+      <p>
+        Войдите в аккаунт.
+      </p>
+      <button onclick="login()">
+        🔐 Войти
+      </button>
+    `;
+    return;
+  }
+  (roles[user] || ["student"])
+    .forEach(role => {
+      box.innerHTML +=
+        `<span class="role">
+          ${roleName(role)}
+        </span>`;
+    });
+}
+/* =========================================
+   ЗАКРЫТЬ РЕДАКТОРЫ
+========================================= */
+function closeEditors() {
+  [
+    "scheduleEditor",
+    "accountManager",
+    "accountEditor",
+    "teacherEditor",
+    "announcementEditor",
+    "homeworkEditor",
+    "eventEditor",
+    "reminderEditor",
+    "rolesEditor"
+  ]
+  .forEach(id => {
+    const el =
+      document.getElementById(id);
+    if (el)
+      el.classList.add(
+        "hidden"
+      );
+  });
+}
+/* =========================================
+   РЕНДЕР
+========================================= */
+function renderAll() {
+  renderSchedule();
+  renderScheduleStatus();
+  renderHomework();
+  renderAnnouncements();
+  renderStudents();
+  renderTeachers();
+  renderEvents();
+  renderReminders();
+  renderChat();
+  renderAccount();
+  const adminButton =
+    document.getElementById(
+      "adminButton"
+    );
+  if (
+    isAdmin()
+  ) {
+    adminButton.classList.remove(
+      "hidden"
+    );
+  } else {
+    adminButton.classList.add(
+      "hidden"
+    );
+  }
+}
+/* =========================================
+   УЧЕНИКИ
+========================================= */
+function renderStudents() {
+  const box =
+    document.getElementById(
+      "studentsList"
+    );
+  box.innerHTML = "";
+  students.forEach(name => {
+    let html = "";
+    (
+      roles[name] ||
+      ["student"]
+    )
+    .forEach(role => {
+      html +=
+        `<span class="role">
+          ${roleName(role)}
+        </span>`;
+    });
+    box.innerHTML += `
+      <div class="student-item">
+        <b>${name}</b>
+        <br>
+        ${html}
+      </div>
+    `;
+  });
+}
+/* =========================================
+   ЗАПУСК
+========================================= */
+renderAll();
+</script>
+</body>
+</html>
